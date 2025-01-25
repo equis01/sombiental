@@ -184,31 +184,53 @@
                 <h2 class="u-custom-font u-font-montserrat u-text u-text-8"> Ponerse en contacto</h2>
                 <div class="u-align-left u-form u-form-1">
 		<form 
-		  action="https://script.google.com/macros/s/AKfycbwBZs_Uz8V33oKdqVMgARZ1uQON09Daqpt-_F5yQbmIfW5bJyT0s9Ptzu4-wbAUgOnH/exec" 
-		  method="post" 
+		  action="javascript:void(0)" 
 		  class="u-clearfix u-form-spacing-28 u-form-vertical u-inner-form" 
 		  style="padding: 0px;" 
-		  name="form">
+		  name="form"
+		  onsubmit="submitForm();">
 		  <div class="u-form-group u-form-name u-label-top">
 		    <label for="name" class="u-label">Nombre</label>
-		    <input type="text" placeholder="Tu nombre" id="name" name="name" class="u-grey-10 u-input u-input-rectangle u-radius-7 u-input-1" required="">
+		    <input type="text" placeholder="Tu nombre" id="name" name="name" class="u-grey-10 u-input u-input-rectangle u-radius-7 u-input-1" required>
 		  </div>
 		  <div class="u-form-group u-form-name u-label-top">
 		    <label for="phone" class="u-label">Celular</label>
-		    <input type="text" placeholder="Número celular" id="phone" name="phone" class="u-grey-10 u-input u-input-rectangle u-radius-7 u-input-1" required="">
+		    <input type="text" placeholder="Número celular" id="phone" name="phone" class="u-grey-10 u-input u-input-rectangle u-radius-7 u-input-1" required>
 		  </div>
 		  <div class="u-form-email u-form-group u-label-top">
 		    <label for="email" class="u-label">Correo</label>
-		    <input type="email" placeholder="alias@dominio.com" id="email" name="email" class="u-grey-10 u-input u-input-rectangle u-radius-7 u-input-2" required="">
+		    <input type="email" placeholder="alias@dominio.com" id="email" name="email" class="u-grey-10 u-input u-input-rectangle u-radius-7 u-input-2" required>
 		  </div>
 		  <div class="u-form-group u-form-message u-label-top">
 		    <label for="message" class="u-label">¿Cómo podríamos ayudarte?</label>
-		    <textarea rows="4" cols="50" id="message" name="message" class="u-grey-10 u-input u-input-rectangle u-radius-7 u-input-3" required=""></textarea>
+		    <textarea rows="4" cols="50" id="message" name="message" class="u-grey-10 u-input u-input-rectangle u-radius-7 u-input-3" required></textarea>
 		  </div>
 		  <div class="u-align-right u-form-group u-form-submit u-label-top">
 		    <input type="submit" value="Entregar" class="u-btn u-btn-round u-button-style u-palette-2-base u-radius-7">
 		  </div>
 		</form>
+		
+		<script>
+		  function submitForm() {
+		    // Recoger los datos del formulario
+		    var formData = new FormData(document.forms["form"]);
+		
+		    // Enviar el formulario a Google Apps Script
+		    fetch('https://script.google.com/macros/s/AKfycbwiAtY3I7boOORC1RONSy_dDwDkM_0PR9Zhyv2o2S5Fv4g8SFsH80B3hQpyYjXzo33O/exec', {
+		      method: 'POST',
+		      body: formData
+		    })
+		    .then(response => response.text())
+		    .then(data => {
+		      // Redirigir a la página de éxito o error según el resultado
+		      window.location.href = data.includes('succesfull-contact') ? 'https://sombiental.com/sucesfull-contact' : 'https://sombiental.com/error-form';
+		    })
+		    .catch(error => {
+		      console.error('Error:', error);
+		      window.location.href = 'https://sombiental.com/error-form';
+		    });
+		  }
+		</script>
                 </div>
               </div>
             </div>
