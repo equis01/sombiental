@@ -216,22 +216,23 @@
 		    var formData = new FormData(document.forms["form"]);
 		
 		    // Enviar el formulario a Google Apps Script
-		    fetch('https://script.google.com/macros/s/AKfycbwiAtY3I7boOORC1RONSy_dDwDkM_0PR9Zhyv2o2S5Fv4g8SFsH80B3hQpyYjXzo33O/exec', {
+		    fetch('https://script.google.com/macros/s/AKfycbx0Ht_ojENwrgpoP4McoGVrilkW9ffsE3aKqBOvbxsXFd5w7V918HSZUs7ZvBk5OYW9/exec', {
 		      method: 'POST',
 		      body: formData
 		    })
 		    .then(response => response.text())
 		    .then(data => {
-		      // Redirigir a la página de éxito o error según el resultado
-		      window.location.href = data.includes('succesfull-contact') ? 'https://sombiental.com/sucesfull-contact' : 'https://sombiental.com/error-form';
+		      // Si todo es correcto, redirigir a la página de éxito
+		      window.location.href = 'https://sombiental.com/sucesfull-contact';
 		    })
 		    .catch(error => {
+		      // Si ocurre un error en el envío del formulario, redirigir a la página de error
 		      console.error('Error:', error);
 		      window.location.href = 'https://sombiental.com/error-form';
 		    });
 		  }
 		</script>
-                </div>
+		</div>
               </div>
             </div>
           </div>
